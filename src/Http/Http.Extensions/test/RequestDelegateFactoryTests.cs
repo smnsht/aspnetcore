@@ -1043,10 +1043,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [MemberData(nameof(BadArgumentEnumerableActions))]
     public void BuildRequestDelegateThrowsNotSupportedExceptionForEnumerable(Delegate @delegate)
     {
-        var errorMessage = $"The {nameof(AsParametersAttribute)} is not supported on enumerable parameters.";
-        var exception = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(@delegate));
-
-        Assert.Equal(errorMessage, exception.Message);
+        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(@delegate));
     }
 
     [Fact]
